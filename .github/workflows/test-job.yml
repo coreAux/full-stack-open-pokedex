@@ -24,8 +24,8 @@ jobs:
         run: echo '$COMMIT_MESSAGES'
       - name: trying things out
         env:
-          TEST: ${{ toJson(github.event.commits.*.message) }}
-        run: echo '$TEST'
+          COMMIT_MESSAGES: ${{ contains(toJson(github.event.commits.*.message), 'from the top')}}
+        run: echo '$COMMIT_MESSAGES'
 
       # - name: working
       #   if: 'contains(toJSON(github.event.commits.*.message, '#skip'))'

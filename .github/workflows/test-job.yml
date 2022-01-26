@@ -22,9 +22,13 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo '$COMMIT_MESSAGES'
-      - name: working
-        if: "contains(toJson(github.event.commits.*.message, '#skip'))"
-        run: echo 'Commit message contains #skip'
-      - name: not working
-        if: "!contains(toJson(github.event.commits.*.message, '#skip'))"
-        run: echo 'Something went wrong :/'
+      - name: trying things out
+        env:
+          COMMIT_MESSAGES: ${{ contains(toJson(github.event.commits.*.message), '#skip')}}
+        run echo '$COMMIT_MESSAGES'
+      # - name: working
+      #   if: 'contains(toJSON(github.event.commits.*.message, '#skip'))'
+      #   run: echo 'Commit message contains skip'
+      # - name: not working
+      #   if: '!contains(toJSON(github.event.commits.*.message, '#skip'))'
+      #   run: echo 'Something went wrong :/'

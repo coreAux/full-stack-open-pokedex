@@ -29,7 +29,3 @@ jobs:
       - name: should not run
         if: contains(toJson(github.event.commits.*.message), '#skip') == false
         run: echo "Hello!"
-
-      # - name: working
-      #   if: 'contains(toJSON(github.event.commits.*.message, '#skip'))'
-      #   run: echo 'Commit message contains skip'

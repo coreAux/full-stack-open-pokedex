@@ -48,3 +48,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           DEFAULT_BUMP: 'patch'
+
+      - uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo, message, commit, author, took
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: contains(toJson(github.event.commits.*.message), '#skip') == false && success() || failure()
